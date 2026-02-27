@@ -1,1 +1,3 @@
-# react-starter-template-327212
+# Project Repository
+
+This is the initial README file for the project.
