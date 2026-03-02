@@ -7,8 +7,8 @@ function Shield({ title, body }) {
     <div className="iconCard">
       <div className="iconCardHeader">
         <h3 className="iconCardTitle">{title}</h3>
-        <div className="iconPill" style={{ background: "var(--deck-navy)" }}>
-          🔒
+        <div className="iconPill" style={{ background: "var(--deck-navy)" }} aria-hidden="true">
+          LOCK
         </div>
       </div>
       <p className="iconCardBody">{body}</p>

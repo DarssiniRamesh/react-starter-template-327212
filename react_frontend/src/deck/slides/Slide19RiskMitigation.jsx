@@ -24,18 +24,19 @@ export default function Slide19RiskMitigation({ slideNumber, slideMeta }) {
         </h2>
         <p className="slideSubTitle">How we ensure this works</p>
 
-        <div style={{ marginTop: 14 }} className="sectionBlock">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, fontWeight: 900, color: "var(--deck-navy)" }}>
-            <div>Risk</div>
-            <div>Mitigation Strategy</div>
+        <div style={{ marginTop: 14 }} className="deckTable" role="table" aria-label="Risk mitigation table">
+          <div className="deckTableHeader" role="rowgroup">
+            <div role="columnheader">Risk</div>
+            <div role="columnheader">Mitigation Strategy</div>
           </div>
-          <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+
+          <div className="deckTableRows" role="rowgroup">
             {risks.map((r) => (
-              <div key={r.risk} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                <div style={{ background: "rgba(239,68,68,0.08)", borderRadius: 12, padding: 10, border: "1px solid rgba(239,68,68,0.14)" }}>
+              <div key={r.risk} className="deckTableRow" role="row">
+                <div className="deckTableCell deckTableCellRisk" role="cell">
                   {r.risk}
                 </div>
-                <div style={{ background: "rgba(16,185,129,0.10)", borderRadius: 12, padding: 10, border: "1px solid rgba(16,185,129,0.14)" }}>
+                <div className="deckTableCell deckTableCellMitigation" role="cell">
                   {r.mitigation}
                 </div>
               </div>

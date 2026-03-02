@@ -59,13 +59,28 @@ export default function Slide10UseCases({ slideNumber, slideMeta }) {
 
           <div className="sectionBlock">
             <p className="sectionBlockTitle">Priority Distribution</p>
-            <ul className="bullets">
-              <li>CRITICAL: {counts.CRITICAL}</li>
-              <li>HIGH: {counts.HIGH}</li>
-              <li>MEDIUM: {counts.MEDIUM}</li>
-              <li>LOW: {counts.LOW}</li>
-              <li>STRATEGIC: {counts.STRATEGIC}</li>
-            </ul>
+
+            <div className="barChart" aria-label="Priority distribution bar chart">
+              {[
+                { key: "CRITICAL", value: counts.CRITICAL, color: "var(--deck-chart-critical)" },
+                { key: "HIGH", value: counts.HIGH, color: "var(--deck-chart-high)" },
+                { key: "MEDIUM", value: counts.MEDIUM, color: "var(--deck-chart-medium)" },
+                { key: "LOW", value: counts.LOW, color: "var(--deck-chart-low)" },
+                { key: "STRATEGIC", value: counts.STRATEGIC, color: "var(--deck-chart-strategic)" }
+              ].map((row) => {
+                const max = Math.max(counts.CRITICAL, counts.HIGH, counts.MEDIUM, counts.LOW, counts.STRATEGIC, 1);
+                const pct = Math.round((row.value / max) * 100);
+                return (
+                  <div className="barRow" key={row.key}>
+                    <div className="barLabel">{row.key}</div>
+                    <div className="barTrack" aria-hidden="true">
+                      <div className="barFill" style={{ width: `${pct}%`, background: row.color }} />
+                    </div>
+                    <div className="barValue">{row.value}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

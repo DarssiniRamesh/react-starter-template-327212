@@ -1,32 +1,69 @@
 /* Deck-wide styles. Intentionally isolated from App.css to keep concerns separate. */
 
 :root {
+  /* Canvas */
   --deck-width: 1366px;
   --deck-height: 768px;
-  --deck-safe-pad: 56px;
-  --deck-header-height: 64px;
-  --deck-footer-height: 46px;
-  --deck-font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-    sans-serif;
+
+  /* Slide master spacing (tuned to match Klefki-SVG-Deck.pdf) */
+  --deck-safe-pad: 64px;
+  --deck-header-height: 72px;
+  --deck-footer-height: 52px;
+
+  /* Typography */
+  --deck-font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --deck-title-size: 36px;
+  --deck-h2-size: 34px;
+  --deck-kicker-size: 12px;
+  --deck-body-size: 15px;
+
+  /* Visual tokens (aligned to Visual-Design-Guide.pdf) */
+  --deck-radius: 18px;
+  --deck-radius-md: 16px;
+  --deck-radius-sm: 12px;
+
+  --deck-shadow: 0 18px 46px rgba(26, 39, 69, 0.14);
+  --deck-shadow-soft: 0 12px 26px rgba(26, 39, 69, 0.10);
+
+  --deck-line: rgba(45, 55, 72, 0.12);
+  --deck-line-strong: rgba(45, 55, 72, 0.16);
+
+  /* These come from App.css (deck theme colors). Provide fallbacks anyway. */
+  --deck-klefki-blue: var(--deck-klefki-blue, #0066cc);
+  --deck-turquoise: var(--deck-turquoise, #06b6d4);
+  --deck-navy: var(--deck-navy, #1a2745);
+  --deck-success: var(--deck-success, #10b981);
+  --deck-urgency: var(--deck-urgency, #f59e0b);
+  --deck-bg: var(--deck-bg, #f8f9fa);
+  --deck-surface: var(--deck-surface, #ffffff);
+  --deck-text: var(--deck-text, #2d3748);
+  --deck-text-muted: var(--deck-text-muted, rgba(45, 55, 72, 0.72));
+  --deck-problem: var(--deck-problem, #ef4444);
+
+  /* Semantic backgrounds */
+  --deck-bg-problem: rgba(239, 68, 68, 0.08);
+  --deck-bg-solution: rgba(16, 185, 129, 0.10);
+  --deck-bg-warn: rgba(245, 158, 11, 0.12);
+
+  /* Chart colors (for simple inline charts) */
+  --deck-chart-critical: #ef4444;
+  --deck-chart-high: #f59e0b;
+  --deck-chart-medium: #fbbf24;
+  --deck-chart-low: #94a3b8;
+  --deck-chart-strategic: #7c3aed;
 }
 
+/* Root */
 .deckRoot {
   min-height: 100vh;
-  background: radial-gradient(
-      900px 460px at 10% 15%,
-      rgba(0, 102, 204, 0.10),
-      transparent 55%
-    ),
-    radial-gradient(
-      760px 420px at 90% 10%,
-      rgba(6, 182, 212, 0.10),
-      transparent 55%
-    ),
+  background: radial-gradient(900px 460px at 10% 15%, rgba(0, 102, 204, 0.10), transparent 55%),
+    radial-gradient(760px 420px at 90% 10%, rgba(6, 182, 212, 0.10), transparent 55%),
     var(--deck-bg);
   color: var(--deck-text);
   font-family: var(--deck-font);
 }
 
+/* Top bar (web chrome, not part of slide master) */
 .deckTopbar {
   position: sticky;
   top: 0;
@@ -55,7 +92,7 @@
 }
 
 .deckBrandTitle {
-  font-weight: 700;
+  font-weight: 800;
   font-size: 14px;
   letter-spacing: 0.01em;
 }
@@ -79,7 +116,7 @@
   color: var(--deck-text);
   border-radius: 12px;
   padding: 10px 12px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 13px;
   cursor: pointer;
   transition: transform 0.08s ease, box-shadow 0.12s ease, border-color 0.12s ease;
@@ -109,7 +146,7 @@
 }
 
 .deckMain {
-  padding: 26px 18px 46px;
+  padding: 24px 18px 46px;
 }
 
 .deckStage {
@@ -145,9 +182,10 @@
   position: relative;
 }
 
+/* Slide master header/footer */
 .slideHeader {
   height: var(--deck-header-height);
-  padding: 18px var(--deck-safe-pad) 0;
+  padding: 20px var(--deck-safe-pad) 0;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -160,7 +198,7 @@
   align-items: center;
   color: var(--deck-text-muted);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .slideBody {
@@ -170,7 +208,7 @@
 
 .slideFooter {
   height: var(--deck-footer-height);
-  padding: 0 var(--deck-safe-pad) 16px;
+  padding: 0 var(--deck-safe-pad) 18px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -181,31 +219,32 @@
 .slideFooterLeft {
   font-size: 12px;
   color: var(--deck-text-muted);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .slideFooterRight {
   font-size: 12px;
   color: var(--deck-text-muted);
-  font-weight: 700;
+  font-weight: 800;
 }
 
+/* Typography primitives */
 .slideTitle {
   margin: 0;
   text-align: left;
-  font-size: 38px;
+  font-size: var(--deck-title-size);
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: var(--deck-navy);
 }
 
 .slideKicker {
-  margin: 0 0 12px;
-  font-size: 14px;
+  margin: 0 0 10px;
+  font-size: var(--deck-kicker-size);
   color: var(--deck-text-muted);
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
 }
 
 .slideSubTitle {
@@ -213,12 +252,14 @@
   font-size: 18px;
   color: var(--deck-text-muted);
   text-align: left;
-  line-height: 1.35;
+  line-height: 1.38;
+  font-weight: 600;
 }
 
+/* Layout */
 .twoCol {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: 22px;
   height: 100%;
 }
@@ -229,61 +270,69 @@
   gap: 14px;
 }
 
+/* Cards */
 .statCard {
   border: 1px solid rgba(45, 55, 72, 0.12);
-  border-radius: 14px;
-  padding: 12px 14px;
-  background: linear-gradient(
-    160deg,
-    rgba(0, 102, 204, 0.08),
-    rgba(6, 182, 212, 0.05)
-  );
+  border-radius: var(--deck-radius-md);
+  padding: 14px 16px;
+  background: linear-gradient(160deg, rgba(0, 102, 204, 0.09), rgba(6, 182, 212, 0.05));
   text-align: left;
+  box-shadow: 0 1px 0 rgba(26, 39, 69, 0.03);
 }
 
 .statValue {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 30px;
+  font-weight: 900;
   color: var(--deck-navy);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
 .statLabel {
-  margin-top: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  margin-top: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   color: var(--deck-text-muted);
   text-transform: uppercase;
 }
 
 .sectionBlock {
   border: 1px solid rgba(45, 55, 72, 0.12);
-  border-radius: 14px;
+  border-radius: var(--deck-radius-md);
   padding: 14px 16px;
   text-align: left;
   background: white;
+  box-shadow: 0 1px 0 rgba(26, 39, 69, 0.03);
 }
 
 .sectionBlockTitle {
-  font-weight: 800;
+  font-weight: 900;
   color: var(--deck-navy);
   margin: 0 0 8px;
   font-size: 16px;
+  letter-spacing: -0.01em;
 }
 
+/* Bullets */
 .bullets {
   margin: 0;
-  padding-left: 16px;
+  padding-left: 18px;
   color: var(--deck-text);
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: var(--deck-body-size);
+  line-height: 1.5;
 }
 
 .bullets li {
   margin: 6px 0;
 }
 
+.bullets li strong {
+  font-weight: 900;
+  color: var(--deck-navy);
+}
+
+/* Icon cards */
 .iconCardGrid4 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -292,7 +341,7 @@
 }
 
 .iconCard {
-  border-radius: 16px;
+  border-radius: var(--deck-radius);
   border: 1px solid rgba(45, 55, 72, 0.12);
   padding: 14px 16px;
   text-align: left;
@@ -300,11 +349,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: 0 1px 0 rgba(26, 39, 69, 0.03);
 }
 
 .iconCardHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
 }
@@ -314,12 +364,15 @@
   min-width: 34px;
   padding: 0 10px;
   border-radius: 999px;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 900;
   color: white;
   background: var(--deck-klefki-blue);
   letter-spacing: 0.02em;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 20px rgba(26, 39, 69, 0.10);
 }
 
 .iconCardTitle {
@@ -328,29 +381,37 @@
   color: var(--deck-navy);
   font-weight: 900;
   letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 .iconCardBody {
   margin: 0;
   color: var(--deck-text);
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: var(--deck-body-size);
+  line-height: 1.5;
+  white-space: pre-line; /* Enables "\n" in slide strings to render like the PDF text blocks */
 }
 
+/* Modes / semantic sections */
 .problemMode {
-  background: linear-gradient(180deg, rgba(239, 68, 68, 0.08), rgba(255, 255, 255, 0.9));
+  background: linear-gradient(180deg, var(--deck-bg-problem), rgba(255, 255, 255, 0.92));
 }
 
 .solutionMode {
-  background: linear-gradient(180deg, rgba(16, 185, 129, 0.10), rgba(255, 255, 255, 0.92));
+  background: linear-gradient(180deg, var(--deck-bg-solution), rgba(255, 255, 255, 0.92));
 }
 
+.warnMode {
+  background: linear-gradient(180deg, var(--deck-bg-warn), rgba(255, 255, 255, 0.92));
+}
+
+/* Timeline */
 .timeline {
   position: relative;
   display: grid;
   gap: 10px;
   padding: 14px 16px;
-  border-radius: 16px;
+  border-radius: var(--deck-radius);
   border: 1px solid rgba(45, 55, 72, 0.12);
   background: white;
 }
@@ -376,8 +437,100 @@
   font-size: 13px;
   margin-top: 2px;
   color: var(--deck-text-muted);
+  font-weight: 600;
 }
 
+/* Table primitive (used for Risk slide) */
+.deckTable {
+  width: 100%;
+  border: 1px solid rgba(45, 55, 72, 0.12);
+  border-radius: var(--deck-radius);
+  overflow: hidden;
+  background: white;
+}
+
+.deckTableHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: rgba(26, 39, 69, 0.03);
+  border-bottom: 1px solid rgba(45, 55, 72, 0.10);
+  padding: 12px 14px;
+  font-weight: 900;
+  color: var(--deck-navy);
+}
+
+.deckTableRows {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px 14px;
+}
+
+.deckTableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.deckTableCell {
+  border-radius: var(--deck-radius-sm);
+  padding: 10px 12px;
+  border: 1px solid rgba(45, 55, 72, 0.10);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 650;
+}
+
+.deckTableCellRisk {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.14);
+}
+
+.deckTableCellMitigation {
+  background: rgba(16, 185, 129, 0.10);
+  border-color: rgba(16, 185, 129, 0.14);
+}
+
+/* Simple bar chart primitive (used for Slide 10 distribution / Slide 18 breakdown) */
+.barChart {
+  display: grid;
+  gap: 10px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 46px;
+  gap: 10px;
+  align-items: center;
+}
+
+.barLabel {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--deck-navy);
+}
+
+.barTrack {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(26, 39, 69, 0.08);
+  overflow: hidden;
+  border: 1px solid rgba(45, 55, 72, 0.10);
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.barValue {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--deck-text-muted);
+  text-align: right;
+}
+
+/* Overview */
 .overviewGrid {
   max-width: 1200px;
   margin: 0 auto;
@@ -398,7 +551,7 @@
 
 .overviewThumb:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(26, 39, 69, 0.10);
+  box-shadow: var(--deck-shadow-soft);
 }
 
 .overviewThumbTitle {
@@ -412,7 +565,7 @@
   margin-top: 6px;
   font-size: 12px;
   color: var(--deck-text-muted);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 @media (max-width: 1100px) {
