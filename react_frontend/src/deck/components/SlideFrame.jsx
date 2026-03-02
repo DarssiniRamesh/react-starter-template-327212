@@ -19,7 +19,7 @@ export default function SlideFrame({ slideNumber, slideTitle, sectionLabel, chil
   return (
     <div className="slideCanvas" role="group" aria-label={`Slide ${slideNumber}: ${slideTitle}`}>
       <div className="slideHeader">
-        <div style={{ textAlign: "left" }}>{sectionLabel ? <p className="slideKicker">{sectionLabel}</p> : null}</div>
+        <div className="slideHeaderLeft">{sectionLabel ? <p className="slideKicker">{sectionLabel}</p> : null}</div>
         <div className="slideHeaderRight">
           <span>Klefki by Vlinder Inc.</span>
         </div>

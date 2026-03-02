@@ -6,9 +6,14 @@
   --deck-height: 768px;
 
   /* Slide master spacing (tuned to match Klefki-SVG-Deck.pdf) */
-  --deck-safe-pad: 64px;
+  --deck-safe-pad: 60px;
   --deck-header-height: 72px;
   --deck-footer-height: 52px;
+
+  /* Global rhythm (use shared values to keep the entire deck visually consistent) */
+  --deck-gap-lg: 18px;
+  --deck-gap-md: 12px;
+  --deck-gap-sm: 10px;
 
   /* Typography */
   --deck-font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -146,7 +151,7 @@
 }
 
 .deckMain {
-  padding: 24px 18px 46px;
+  padding: 22px 18px 28px;
 }
 
 .deckStage {
@@ -185,11 +190,17 @@
 /* Slide master header/footer */
 .slideHeader {
   height: var(--deck-header-height);
-  padding: 20px var(--deck-safe-pad) 0;
+  padding: 16px var(--deck-safe-pad) 0;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+.slideHeaderLeft {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
 }
 
 .slideHeaderRight {
@@ -203,12 +214,12 @@
 
 .slideBody {
   height: calc(var(--deck-height) - var(--deck-header-height) - var(--deck-footer-height));
-  padding: 10px var(--deck-safe-pad) 0;
+  padding: 8px var(--deck-safe-pad) 0;
 }
 
 .slideFooter {
   height: var(--deck-footer-height);
-  padding: 0 var(--deck-safe-pad) 18px;
+  padding: 0 var(--deck-safe-pad) 10px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -239,12 +250,16 @@
 }
 
 .slideKicker {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-size: var(--deck-kicker-size);
   color: var(--deck-text-muted);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.14em;
+}
+
+.slideHeader .slideKicker {
+  margin: 0; /* header must be tight and baseline-aligned across all slides */
 }
 
 .slideSubTitle {
@@ -260,21 +275,21 @@
 .twoCol {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: 22px;
+  gap: var(--deck-gap-lg);
   height: 100%;
 }
 
 .cardGrid2x2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: var(--deck-gap-md);
 }
 
 /* Cards */
 .statCard {
   border: 1px solid rgba(45, 55, 72, 0.12);
   border-radius: var(--deck-radius-md);
-  padding: 14px 16px;
+  padding: 12px 14px;
   background: linear-gradient(160deg, rgba(0, 102, 204, 0.09), rgba(6, 182, 212, 0.05));
   text-align: left;
   box-shadow: 0 1px 0 rgba(26, 39, 69, 0.03);
@@ -300,7 +315,7 @@
 .sectionBlock {
   border: 1px solid rgba(45, 55, 72, 0.12);
   border-radius: var(--deck-radius-md);
-  padding: 14px 16px;
+  padding: 12px 14px;
   text-align: left;
   background: white;
   box-shadow: 0 1px 0 rgba(26, 39, 69, 0.03);
@@ -324,7 +339,7 @@
 }
 
 .bullets li {
-  margin: 6px 0;
+  margin: 4px 0;
 }
 
 .bullets li strong {
@@ -337,18 +352,18 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: 1fr;
-  gap: 14px;
+  gap: var(--deck-gap-md);
 }
 
 .iconCard {
   border-radius: var(--deck-radius);
   border: 1px solid rgba(45, 55, 72, 0.12);
-  padding: 14px 16px;
+  padding: 12px 14px;
   text-align: left;
   background: white;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   box-shadow: 0 1px 0 rgba(26, 39, 69, 0.03);
 }
 
@@ -588,7 +603,7 @@
 /* Mini “at a glance” stack row (reduces perceived bottom whitespace by adding balanced visuals) */
 .slideTightStack {
   display: grid;
-  gap: 12px;
+  gap: var(--deck-gap-sm);
   align-content: start;
 }
 

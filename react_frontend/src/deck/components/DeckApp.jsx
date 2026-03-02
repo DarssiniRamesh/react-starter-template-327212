@@ -15,7 +15,8 @@ function useSlideScale(designWidth, designHeight) {
       // Scale based on available viewport width; keep some margins.
       const maxW = Math.min(1200, window.innerWidth - 36);
       const scaleByWidth = maxW / designWidth;
-      const scaleByHeight = (window.innerHeight - 220) / designHeight;
+      // Reduce reserved chrome so the deck uses more of the available viewport height.
+      const scaleByHeight = (window.innerHeight - 170) / designHeight;
       setScale(Math.max(0.3, Math.min(scaleByWidth, scaleByHeight, 1)));
     };
 
