@@ -48,6 +48,7 @@ export default function DeckApp() {
   const slides = useMemo(() => getSlides(), []);
   const [index, setIndex] = useState(0);
   const [overviewOpen, setOverviewOpen] = useState(false);
+  const [exporting, setExporting] = useState(false);
   const scale = useSlideScale(1366, 768);
 
   const goTo = useCallback(
@@ -86,13 +87,26 @@ export default function DeckApp() {
       // Lightweight observability (searchable in console).
       // eslint-disable-next-line no-console
       console.info("[ExportSvgKlefkiDeckFlow] start", { slideCount: slides.length });
-      await exportSvgKlefkiDeckToPptx({ fileName: "SVG-Klefki-Deck-March-2026.pptx" });
+
+      // Mount offscreen export DOM for accurate capture.
+      setExporting(true);
+
+      // Give React a tick to commit the export tree before we start polling for nodes.
+      await new Promise((r) => setTimeout(r, 50));
+
+      await exportSvgKlefkiDeckToPptx({
+        fileName: "SVG-Klefki-Deck-March-2026.pptx",
+        expectedSlideCount: slides.length
+      });
+
       // eslint-disable-next-line no-console
       console.info("[ExportSvgKlefkiDeckFlow] success");
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error("[ExportSvgKlefkiDeckFlow] failure", err);
       alert("PPTX export failed. Please check the browser console for details.");
+    } finally {
+      setExporting(false);
     }
   }, [slides.length]);
 
@@ -166,6 +180,25 @@ export default function DeckApp() {
             </div>
           </div>
         )}
+
+        {/* Off-screen DOM used for PPTX export.
+            Important: must NOT use display:none; DOM-to-image libraries require layout to be computed.
+            We mount this only while exporting to avoid ongoing perf overhead. */}
+        {exporting ? (
+          <div className="pptxExportStage" aria-hidden="true">
+            {slides.map((s, i) => (
+              <div
+                // Stable contract for the exporter: it captures these nodes in numeric order.
+                // Keep this attribute name stable (searchable) for future maintenance.
+                key={`pptx-${s.id}`}
+                data-pptx-slide="true"
+                data-slide-number={i + 1}
+              >
+                <s.Component slideNumber={i + 1} slideMeta={s} />
+              </div>
+            ))}
+          </div>
+        ) : null}
       </main>
     </div>
   );
