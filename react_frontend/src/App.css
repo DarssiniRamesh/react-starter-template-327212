@@ -8,6 +8,21 @@
   --border-color: #e9ecef;
   --button-bg: #007bff;
   --button-text: #ffffff;
+
+  /* Deck theme colors (from Visual-Design-Guide.pdf) */
+  --deck-klefki-blue: #0066cc;
+  --deck-turquoise: #06b6d4;
+  --deck-navy: #1a2745;
+  --deck-success: #10b981;
+  --deck-urgency: #f59e0b;
+  --deck-bg: #f8f9fa;
+  --deck-surface: #ffffff;
+  --deck-text: #2d3748;
+  --deck-text-muted: rgba(45, 55, 72, 0.72);
+  --deck-problem: #ef4444;
+
+  --deck-radius: 16px;
+  --deck-shadow: 0 14px 40px rgba(26, 39, 69, 0.14);
 }
 
 [data-theme="dark"] {
@@ -29,6 +44,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* The slide deck uses its own layout; keep template styles available but unused. */
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -1,0 +1,432 @@
+/* Deck-wide styles. Intentionally isolated from App.css to keep concerns separate. */
+
+:root {
+  --deck-width: 1366px;
+  --deck-height: 768px;
+  --deck-safe-pad: 56px;
+  --deck-header-height: 64px;
+  --deck-footer-height: 46px;
+  --deck-font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+.deckRoot {
+  min-height: 100vh;
+  background: radial-gradient(
+      900px 460px at 10% 15%,
+      rgba(0, 102, 204, 0.10),
+      transparent 55%
+    ),
+    radial-gradient(
+      760px 420px at 90% 10%,
+      rgba(6, 182, 212, 0.10),
+      transparent 55%
+    ),
+    var(--deck-bg);
+  color: var(--deck-text);
+  font-family: var(--deck-font);
+}
+
+.deckTopbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(248, 249, 250, 0.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(45, 55, 72, 0.10);
+}
+
+.deckTopbarInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.deckBrand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.deckBrandTitle {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.deckBrandSub {
+  font-size: 12px;
+  color: var(--deck-text-muted);
+  margin-top: 2px;
+}
+
+.deckControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.deckBtn {
+  appearance: none;
+  border: 1px solid rgba(45, 55, 72, 0.16);
+  background: white;
+  color: var(--deck-text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.deckBtn:focus-visible {
+  outline: 3px solid rgba(0, 102, 204, 0.25);
+  outline-offset: 2px;
+}
+
+.deckBtn:hover {
+  border-color: rgba(0, 102, 204, 0.35);
+  box-shadow: 0 10px 22px rgba(26, 39, 69, 0.08);
+  transform: translateY(-1px);
+}
+
+.deckBtnPrimary {
+  background: var(--deck-klefki-blue);
+  color: white;
+  border-color: rgba(0, 102, 204, 0.55);
+}
+
+.deckBtnWarning {
+  background: var(--deck-urgency);
+  color: #1a2745;
+  border-color: rgba(245, 158, 11, 0.65);
+}
+
+.deckMain {
+  padding: 26px 18px 46px;
+}
+
+.deckStage {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+.slideViewport {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  place-items: center;
+}
+
+/* Slide scaling container (keeps 16:9 while responsive) */
+.slideScaleWrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+}
+
+.slideCanvas {
+  width: var(--deck-width);
+  height: var(--deck-height);
+  transform-origin: top left;
+  background: var(--deck-surface);
+  border-radius: var(--deck-radius);
+  box-shadow: var(--deck-shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.slideHeader {
+  height: var(--deck-header-height);
+  padding: 18px var(--deck-safe-pad) 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.slideHeaderRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--deck-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.slideBody {
+  height: calc(var(--deck-height) - var(--deck-header-height) - var(--deck-footer-height));
+  padding: 10px var(--deck-safe-pad) 0;
+}
+
+.slideFooter {
+  height: var(--deck-footer-height);
+  padding: 0 var(--deck-safe-pad) 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid rgba(45, 55, 72, 0.08);
+}
+
+.slideFooterLeft {
+  font-size: 12px;
+  color: var(--deck-text-muted);
+  font-weight: 600;
+}
+
+.slideFooterRight {
+  font-size: 12px;
+  color: var(--deck-text-muted);
+  font-weight: 700;
+}
+
+.slideTitle {
+  margin: 0;
+  text-align: left;
+  font-size: 38px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--deck-navy);
+}
+
+.slideKicker {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--deck-text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.slideSubTitle {
+  margin: 10px 0 0;
+  font-size: 18px;
+  color: var(--deck-text-muted);
+  text-align: left;
+  line-height: 1.35;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 22px;
+  height: 100%;
+}
+
+.cardGrid2x2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.statCard {
+  border: 1px solid rgba(45, 55, 72, 0.12);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: linear-gradient(
+    160deg,
+    rgba(0, 102, 204, 0.08),
+    rgba(6, 182, 212, 0.05)
+  );
+  text-align: left;
+}
+
+.statValue {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--deck-navy);
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--deck-text-muted);
+  text-transform: uppercase;
+}
+
+.sectionBlock {
+  border: 1px solid rgba(45, 55, 72, 0.12);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+  background: white;
+}
+
+.sectionBlockTitle {
+  font-weight: 800;
+  color: var(--deck-navy);
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.bullets {
+  margin: 0;
+  padding-left: 16px;
+  color: var(--deck-text);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.bullets li {
+  margin: 6px 0;
+}
+
+.iconCardGrid4 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 14px;
+}
+
+.iconCard {
+  border-radius: 16px;
+  border: 1px solid rgba(45, 55, 72, 0.12);
+  padding: 14px 16px;
+  text-align: left;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.iconCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.iconPill {
+  height: 34px;
+  min-width: 34px;
+  padding: 0 10px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: white;
+  background: var(--deck-klefki-blue);
+  letter-spacing: 0.02em;
+}
+
+.iconCardTitle {
+  margin: 0;
+  font-size: 18px;
+  color: var(--deck-navy);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.iconCardBody {
+  margin: 0;
+  color: var(--deck-text);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.problemMode {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.08), rgba(255, 255, 255, 0.9));
+}
+
+.solutionMode {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.10), rgba(255, 255, 255, 0.92));
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(45, 55, 72, 0.12);
+  background: white;
+}
+
+.timelineRow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.timelineDate {
+  font-weight: 900;
+  color: var(--deck-navy);
+}
+
+.timelineItemTitle {
+  font-weight: 800;
+  color: var(--deck-text);
+}
+
+.timelineItemNote {
+  font-size: 13px;
+  margin-top: 2px;
+  color: var(--deck-text-muted);
+}
+
+.overviewGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.overviewThumb {
+  border-radius: 16px;
+  border: 1px solid rgba(45, 55, 72, 0.14);
+  background: white;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.overviewThumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(26, 39, 69, 0.10);
+}
+
+.overviewThumbTitle {
+  font-weight: 900;
+  color: var(--deck-navy);
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.overviewThumbMeta {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--deck-text-muted);
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .overviewGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .overviewGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}
