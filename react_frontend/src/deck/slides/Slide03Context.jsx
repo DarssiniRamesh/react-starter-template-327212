@@ -24,13 +24,12 @@ export default function Slide03Context({ slideNumber, slideMeta }) {
 
   return (
     <SlideFrame slideNumber={slideNumber} slideTitle={slideMeta.title} sectionLabel="Opening">
-      <div style={{ height: "100%", textAlign: "left" }}>
-        <p className="slideKicker">NOW</p>
+      <div className="slideStack" style={{ height: "100%", textAlign: "left" }}>
         <h2 className="slideTitle" style={{ fontSize: 34 }}>
           The SVG Context — Why Digital Identity Matters
         </h2>
 
-        <div style={{ marginTop: 14 }} className="iconCardGrid4">
+        <div className="iconCardGrid4">
           <Quadrant
             n="1"
             title="Tourism Powerhouse"

@@ -46,7 +46,7 @@ export default function Slide06IntroducingKlefki({ slideNumber, slideMeta }) {
             </p>
           </div>
 
-          <div style={{ display: "grid", gap: 12 }}>
+          <div style={{ display: "grid", gap: 14 }}>
             <Node
               title="1. Digital Wallet Layer"
               body="Citizens store government-issued credentials securely. Mobile-first and offline-capable, interoperable with Inji and other W3C wallets."

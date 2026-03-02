@@ -40,7 +40,7 @@ export default function Slide07TechStack({ slideNumber, slideMeta }) {
           </div>
         </div>
 
-        <div style={{ display: "grid", gap: 12, alignContent: "start" }}>
+        <div style={{ display: "grid", gap: 14, alignContent: "start" }}>
           <Layer
             title="Citizen Experience Layer"
             subtitle="Klefki Wallet • Inji Wallet • Other W3C wallets (interoperable, citizen choice)"

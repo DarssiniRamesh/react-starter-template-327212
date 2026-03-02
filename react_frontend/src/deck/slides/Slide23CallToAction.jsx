@@ -33,7 +33,7 @@ export default function Slide23CallToAction({ slideNumber, slideMeta }) {
           </div>
         </div>
 
-        <div style={{ marginTop: 14 }} className="sectionBlock" >
+        <div style={{ marginTop: 14 }} className="sectionBlock">
           <p className="sectionBlockTitle" style={{ color: "#92400E" }}>Urgency</p>
           <p style={{ margin: 0, fontWeight: 900, fontSize: 18 }}>
             CARDTP ends June 2026. This is the window to embed credential infrastructure and launch pilots before project close-out.

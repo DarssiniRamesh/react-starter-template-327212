@@ -78,7 +78,6 @@ export default function Slide02Vision({ slideNumber, slideMeta }) {
     <SlideFrame slideNumber={slideNumber} slideTitle={slideMeta.title} sectionLabel="Opening">
       <div className="twoCol">
         <div style={{ textAlign: "left" }} className="slideTightStack">
-          <p className="slideKicker">A Nation on the Move</p>
           <h2 className="slideTitle" style={{ fontSize: 34 }}>
             SVG’s Digital Transformation Vision
           </h2>

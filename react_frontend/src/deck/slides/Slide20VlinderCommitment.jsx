@@ -43,7 +43,7 @@ export default function Slide20VlinderCommitment({ slideNumber, slideMeta }) {
           </div>
         </div>
 
-        <div style={{ display: "grid", gap: 12, alignContent: "start" }}>
+        <div style={{ display: "grid", gap: 14, alignContent: "start" }}>
           <div className="sectionBlock solutionMode">
             <p className="sectionBlockTitle">What Sets Us Apart</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 10 }}>

@@ -34,7 +34,7 @@ export default function Slide05MosipJourney({ slideNumber, slideMeta }) {
           </div>
         </div>
 
-        <div style={{ display: "grid", gap: 12 }}>
+        <div style={{ display: "grid", gap: 14 }}>
           <div className="sectionBlock solutionMode">
             <p className="sectionBlockTitle">What’s Working</p>
             <ul className="bullets">

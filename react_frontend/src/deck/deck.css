@@ -12,7 +12,7 @@
 
   /* Global rhythm (use shared values to keep the entire deck visually consistent) */
   --deck-gap-lg: 18px;
-  --deck-gap-md: 12px;
+  --deck-gap-md: 14px;
   --deck-gap-sm: 10px;
 
   /* Typography */
@@ -214,7 +214,7 @@
 
 .slideBody {
   height: calc(var(--deck-height) - var(--deck-header-height) - var(--deck-footer-height));
-  padding: 8px var(--deck-safe-pad) 0;
+  padding: 12px var(--deck-safe-pad) 0;
 }
 
 .slideFooter {
@@ -250,7 +250,7 @@
 }
 
 .slideKicker {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-size: var(--deck-kicker-size);
   color: var(--deck-text-muted);
   font-weight: 800;
@@ -258,12 +258,18 @@
   letter-spacing: 0.14em;
 }
 
+.slideStack {
+  display: grid;
+  gap: var(--deck-gap-md);
+  align-content: start;
+}
+
 .slideHeader .slideKicker {
   margin: 0; /* header must be tight and baseline-aligned across all slides */
 }
 
 .slideSubTitle {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   font-size: 18px;
   color: var(--deck-text-muted);
   text-align: left;
