@@ -188,6 +188,39 @@ async function buildPptxFromDomSlides({
   return pptx;
 }
 
+function base64ToArrayBuffer(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes.buffer;
+}
+
+async function normalizePptxWriteOutputToArrayBuffer(data) {
+  // PptxGenJS supports multiple output types; we normalize to ArrayBuffer for Blob creation.
+  if (data instanceof ArrayBuffer) return data;
+
+  // ArrayBuffer views (e.g., Uint8Array)
+  if (ArrayBuffer.isView(data) && data.buffer instanceof ArrayBuffer) {
+    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+  }
+
+  // Blob (browser default)
+  if (typeof Blob !== "undefined" && data instanceof Blob) {
+    return data.arrayBuffer();
+  }
+
+  // base64 string (no "data:" prefix for PptxGenJS base64 output)
+  if (typeof data === "string") {
+    return base64ToArrayBuffer(data);
+  }
+
+  throw new Error(
+    `ExportSvgKlefkiDeckFlow: Unsupported PPTX output type from PptxGenJS write(): ${Object.prototype.toString.call(
+      data
+    )}`
+  );
+}
+
 // PUBLIC_INTERFACE
 export async function exportSvgKlefkiDeckToPptx({
   fileName,
@@ -252,7 +285,21 @@ export async function exportSvgKlefkiDeckToPptx({
   // eslint-disable-next-line no-console
   console.info("[ExportSvgKlefkiDeckFlow] serialize start");
 
-  const out = await pptx.write("arraybuffer");
+  // PptxGenJS v3 expects `write({ outputType })` in browser builds.
+  // We keep a fallback for older signatures to reduce regressions.
+  let outRaw;
+  try {
+    outRaw = await pptx.write({ outputType: "arraybuffer", compression: true });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      "[ExportSvgKlefkiDeckFlow] pptx.write({outputType}) failed; attempting legacy signature",
+      e
+    );
+    outRaw = await pptx.write("arraybuffer");
+  }
+
+  const out = await normalizePptxWriteOutputToArrayBuffer(outRaw);
 
   // eslint-disable-next-line no-console
   console.info("[ExportSvgKlefkiDeckFlow] serialize success", {
