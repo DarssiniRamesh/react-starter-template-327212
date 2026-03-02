@@ -134,8 +134,14 @@ export default function DeckApp() {
             >
               Overview
             </button>
-            <button className="deckBtn deckBtnPrimary" onClick={onDownloadPptx} aria-label="Download PPTX">
-              Download PPTX
+            <button
+              className="deckBtn deckBtnPrimary"
+              onClick={onDownloadPptx}
+              aria-label="Download PPTX"
+              disabled={exporting}
+              title={exporting ? "Exporting…" : "Download PPTX"}
+            >
+              {exporting ? "Exporting…" : "Download PPTX"}
             </button>
           </div>
         </div>
@@ -180,25 +186,6 @@ export default function DeckApp() {
             </div>
           </div>
         )}
-
-        {/* Off-screen DOM used for PPTX export.
-            Important: must NOT use display:none; DOM-to-image libraries require layout to be computed.
-            We mount this only while exporting to avoid ongoing perf overhead. */}
-        {exporting ? (
-          <div className="pptxExportStage" aria-hidden="true">
-            {slides.map((s, i) => (
-              <div
-                // Stable contract for the exporter: it captures these nodes in numeric order.
-                // Keep this attribute name stable (searchable) for future maintenance.
-                key={`pptx-${s.id}`}
-                data-pptx-slide="true"
-                data-slide-number={i + 1}
-              >
-                <s.Component slideNumber={i + 1} slideMeta={s} />
-              </div>
-            ))}
-          </div>
-        ) : null}
       </main>
     </div>
   );

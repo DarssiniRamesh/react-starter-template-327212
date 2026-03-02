@@ -619,27 +619,6 @@
   }
 }
 
-/* PPTX export stage (off-screen DOM capture) */
-.pptxExportStage {
-  position: fixed;
-  left: -10000px;
-  top: 0;
-  width: var(--deck-width);
-  /* Keep deterministic layout for rendering/capture */
-  display: grid;
-  gap: 0;
-  align-items: start;
-  justify-items: start;
-  /* Ensure it doesn't steal pointer events or interfere with app UX */
-  pointer-events: none;
-  opacity: 1;
-}
-
-/* Export should look like a normal PPT slide (no web “card” styling). */
-.pptxExportStage .slideCanvas {
-  border-radius: 0;
-  box-shadow: none;
-}
 
 /* Overview */
 .overviewGrid {
